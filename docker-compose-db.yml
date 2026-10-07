@@ -5,15 +5,15 @@
 services:
   mysql:
     image: mysql:8.0-debian
-    container_name: xiaozhi-mysql
+    container_name: voxai-mysql
     restart: always
     ports:
       - "127.0.0.1:3306:3306"  # 只监听宿主机回环，服务跑在本机，无需对外网暴露
     environment:
-      - MYSQL_ROOT_PASSWORD=abc123456
-      - MYSQL_DATABASE=xiaozhi
-      - MYSQL_USER=xiaozhi
-      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?请设置环境变量 MYSQL_ROOT_PASSWORD（无默认值）}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-voxai}
+      - MYSQL_USER=${MYSQL_USER:-voxai}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:?请设置环境变量 MYSQL_PASSWORD（无默认值）}
       - LANG=C.UTF-8
       - MYSQL_CHARSET=utf8mb4
       - MYSQL_COLLATION=utf8mb4_unicode_ci
@@ -21,7 +21,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "xiaozhi", "-p123456"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER -p$$MYSQL_PASSWORD"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -39,7 +39,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: xiaozhi-redis
+    container_name: voxai-redis
     restart: always
     ports:
       - "127.0.0.1:6379:6379"  # 只监听宿主机回环，Redis 无口令，不能对外网可达

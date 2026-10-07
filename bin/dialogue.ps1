@@ -1,13 +1,13 @@
 ﻿# =============================================================================
-# xiaozhi-dialogue 管理脚本 (Windows PowerShell)
+# voxai-dialogue 管理脚本 (Windows PowerShell)
 # 用法: bin\dialogue.ps1 <start|stop|restart|status> [dev|prod]，运行环境默认 dev
 # =============================================================================
 param([string]$Action, [string]$SpringProfile)
 
 . (Join-Path $PSScriptRoot '_common.ps1')
 
-$Name   = 'xiaozhi-dialogue'
-$Module = 'xiaozhi-dialogue'
+$Name   = 'voxai-dialogue'
+$Module = 'voxai-dialogue'
 $Port   = 8092
 
 switch ($Action) {

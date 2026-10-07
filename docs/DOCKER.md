@@ -5,8 +5,8 @@
 ## 1. 启动
 
 ```bash
-mkdir xiaozhi && cd xiaozhi
-curl -O https://raw.githubusercontent.com/joey-zhou/xiaozhi-esp32-server-java/main/docker-compose.yml
+mkdir voxai && cd voxai
+curl -O https://raw.githubusercontent.com/your-org/voxai/main/docker-compose.yml
 docker compose up -d
 ```
 
@@ -26,7 +26,7 @@ docker compose ps
 |------|------|
 | 管理界面 | http://localhost:8084 |
 | 后台 API / OTA | http://localhost:8091 |
-| 设备 WebSocket | ws://localhost:8092/ws/xiaozhi/v1/ |
+| 设备 WebSocket | ws://localhost:8092/ws/voxai/v1/ |
 
 ## 3. 配一个大模型
 
@@ -40,12 +40,12 @@ docker compose ps
 设备要连宿主机的**局域网 IP**，不能用 localhost：
 
 - OTA：`http://<宿主机IP>:8091/api/device/ota`
-- WebSocket：`ws://<宿主机IP>:8092/ws/xiaozhi/v1/`
+- WebSocket：`ws://<宿主机IP>:8092/ws/voxai/v1/`
 
 Linux 下容器能自动探测到这个 IP；**macOS / Windows 必须手填**：
 
 ```bash
-curl -O https://raw.githubusercontent.com/joey-zhou/xiaozhi-esp32-server-java/main/.env.example
+curl -O https://raw.githubusercontent.com/your-org/voxai/main/.env.example
 mv .env.example .env        # 编辑 HOST_IP=192.168.1.100
 docker compose up -d server dialogue
 ```
@@ -63,14 +63,14 @@ docker compose down                # 停止，数据保留
 docker compose down -v             # 停止并删除全部数据
 ```
 
-> 从 6.0.0 之前的版本升级：compose 现在固定项目名 `xiaozhi`，数据卷名也跟着变。
+> 从 6.0.0 之前的版本升级：compose 现在固定项目名 `voxai`，数据卷名也跟着变。
 > 想继续用原来的卷，先在 `.env` 里写 `COMPOSE_PROJECT_NAME=<原来的目录名>`，
 > 否则会挂到新的空卷上（旧数据还在，只是没被用到）。
 
-数据都在 Docker 命名卷里（`xiaozhi_mysql_data`、`xiaozhi_audio_data` 等），备份数据库：
+数据都在 Docker 命名卷里（`voxai_mysql_data`、`voxai_audio_data` 等），备份数据库：
 
 ```bash
-docker compose exec mysql mysqldump -u xiaozhi -p123456 xiaozhi > backup.sql
+docker compose exec mysql mysqldump -u voxai -p123456 voxai > backup.sql
 ```
 
 ## 自定义配置
@@ -80,12 +80,12 @@ docker compose exec mysql mysqldump -u xiaozhi -p123456 xiaozhi > backup.sql
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
-| `XIAOZHI_TAG` | `latest` | 镜像版本，线上建议钉具体版本号 |
+| `VOXAI_TAG` | `latest` | 镜像版本，线上建议钉具体版本号 |
 | `WEB_PORT` / `SERVER_PORT` / `DIALOGUE_PORT` | 8084 / 8091 / 8092 | 端口冲突时改 |
 | `MYSQL_PASSWORD` | `123456` | 首次启动后再改要重建数据卷 |
 | `SPRING_PROFILES_ACTIVE` | `dev` | 生产改 `prod` |
 | `HOST_IP` | 空 | 下发给设备的服务器 IP |
-| `XIAOZHI_DEVICE_AUTH_SECRET` | 空 | 设备接入鉴权密钥 |
+| `VOXAI_DEVICE_AUTH_SECRET` | 空 | 设备接入鉴权密钥 |
 
 全部配置项见[配置说明](./CONFIGURATION.md#环境变量)。
 
@@ -94,7 +94,7 @@ docker compose exec mysql mysqldump -u xiaozhi -p123456 xiaozhi > backup.sql
 1. **开设备鉴权**，否则任何人报一个 device-id 就能接进来消耗你的模型额度：
 
    ```bash
-   echo "XIAOZHI_DEVICE_AUTH_SECRET=$(openssl rand -hex 16)" >> .env
+   echo "VOXAI_DEVICE_AUTH_SECRET=$(openssl rand -hex 16)" >> .env
    docker compose up -d server dialogue
    ```
 

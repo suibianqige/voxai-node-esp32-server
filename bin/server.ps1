@@ -1,13 +1,13 @@
 ﻿# =============================================================================
-# xiaozhi-server 管理脚本 (Windows PowerShell)
+# voxai-server 管理脚本 (Windows PowerShell)
 # 用法: bin\server.ps1 <start|stop|restart|status> [dev|prod]，运行环境默认 dev
 # =============================================================================
 param([string]$Action, [string]$SpringProfile)
 
 . (Join-Path $PSScriptRoot '_common.ps1')
 
-$Name   = 'xiaozhi-server'
-$Module = 'xiaozhi-server'
+$Name   = 'voxai-server'
+$Module = 'voxai-server'
 $Port   = 8091
 
 switch ($Action) {

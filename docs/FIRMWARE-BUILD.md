@@ -1,14 +1,14 @@
 # 编译esp32固件
 
-1. 下载`xiaozhi-esp32`
-   项目，按照这个教程配置项目环境[《Windows搭建 ESP IDF 5.3.2开发环境以及编译小智》](https://icnynnzcwou8.feishu.cn/wiki/JEYDwTTALi5s2zkGlFGcDiRknXf)
+1. 下载`voxai-esp32`
+   项目，按照这个教程配置项目环境[《Windows搭建 ESP IDF 5.3.2开发环境以及编译VoxAI》](https://icnynnzcwou8.feishu.cn/wiki/JEYDwTTALi5s2zkGlFGcDiRknXf)（教程基于上游小智项目，步骤通用）
 
 # 1.6.2以下版本固件
 
 > 端口不要写错：**WebSocket 由 dialogue 进程监听 8092**，OTA 由 server 进程监听 8091，两个是不同的进程、不同的端口。
 > 本节写进固件的是 WebSocket 地址，用 8092；下一节 1.6.2 以后固件写的是 OTA 地址，用 8091。
 
-2. 打开`xiaozhi-esp32/main/Kconfig.projbuild`文件，找到`WEBSOCKET_URL`的`default`的内容，把`wss://api.tenclass.net`
+2. 打开`voxai-esp32/main/Kconfig.projbuild`文件，找到`WEBSOCKET_URL`的`default`的内容，把`wss://api.tenclass.net`
    改成你自己的地址，例如，我的接口地址是`ws://192.168.1.25:8092`，就把内容改成这个。
 
 修改前：
@@ -17,7 +17,7 @@
 config WEBSOCKET_URL
     depends on CONNECTION_TYPE_WEBSOCKET
     string "Websocket URL"
-    default "wss://api.tenclass.net/xiaozhi/v1/"
+    default "wss://api.tenclass.net/voxai/v1/"
     help
         Communication with the server through websocket after wake up.
 ```
@@ -28,7 +28,7 @@ config WEBSOCKET_URL
 config WEBSOCKET_URL
     depends on CONNECTION_TYPE_WEBSOCKET
     string "Websocket URL"
-    default "ws://192.168.5.167:8092/ws/xiaozhi/v1/"
+    default "ws://192.168.5.167:8092/ws/voxai/v1/"
     help
         Communication with the server through websocket after wake up.
 ```
@@ -37,14 +37,14 @@ config WEBSOCKET_URL
 
 # 1.6.2以后固件
 
-找到`OTA_URL`的`default`的内容，把`https://api.tenclass.net/xiaozhi/ota/`
+找到`OTA_URL`的`default`的内容，把`https://api.tenclass.net/voxai/ota/`
    改成你自己的地址，例如，我的接口地址是`http://192.168.5.165:8091/api/device/ota/`，就把内容改成这个。
 
 修改前：
 ```
 config OTA_VERSION_URL
     string "OTA Version URL"
-    default "https://api.tenclass.net/xiaozhi/ota/"
+    default "https://api.tenclass.net/voxai/ota/"
     help
         The application will access this URL to check for updates.
 ```
@@ -64,15 +64,15 @@ config OTA_VERSION_URL
 3. 设置编译参数
 
 ```
-# 终端命令行进入xiaozhi-esp32的根目录
-cd xiaozhi-esp32
+# 终端命令行进入voxai-esp32的根目录
+cd voxai-esp32
 # 例如我使用的板子是esp32s3，所以设置编译目标为esp32s3，如果你的板子是其他型号，请替换成对应的型号
 idf.py set-target esp32s3
 # 进入菜单配置
 idf.py menuconfig
 ```
 
-进入菜单配置后，再进入`Xiaozhi Assistant`，将`BOARD_TYPE`设置你板子的具体型号
+进入菜单配置后，再进入`voxAI Node Assistant`，将`BOARD_TYPE`设置你板子的具体型号
 保存退出，回到终端命令行。
 
 4. 编译固件
@@ -110,4 +110,4 @@ https://espressif.github.io/esp-launchpad/
 打开这个教程，[Flash工具/Web端烧录固件（无IDF开发环境）](https://ccnphfhqs21z.feishu.cn/wiki/Zpz4wXBtdimBrLk25WdcXzxcnNS)。
 翻到：`方式二：ESP-Launchpad 浏览器WEB端烧录`，从`3. 烧录固件/下载到开发板`开始，按照教程操作。
 
-烧录成功且联网成功后，通过唤醒词唤醒小智，留意server端输出的控制台信息。
+烧录成功且联网成功后，通过唤醒词唤醒 voxAI Node，留意server端输出的控制台信息。

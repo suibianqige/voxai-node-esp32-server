@@ -117,7 +117,7 @@ export function useMcpToolSelection() {
     if (!toolName) return ''
     return toolName
       .replace(/^func_/, '')
-      .replace(/^XiaoZhi_MCP_Client_/, '')
+      .replace(/^VoxAI_MCP_Client_/, '')
   }
 
   return {

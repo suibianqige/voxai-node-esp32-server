@@ -1,8 +1,8 @@
 {
-  "name": "xiaozhi-esp32-server-java-vue3",
+  "name": "voxai-web",
   "version": "1.0.0",
-  "description": "Connect Ai-智能物联网管理平台 (Vue3)",
-  "author": "JoeyZhou <zzq980308ZZQ@gmail.com>",
+  "description": "voxAI Node - 智能物联网管理平台 (Vue3)",
+  "author": "Your Company",
   "private": true,
   "type": "module",
   "packageManager": "npm@10.9.4",

@@ -53,7 +53,7 @@
 
 | 变量 | 默认值 |
 |------|--------|
-| `SPRING_DATASOURCE_URL` / `_USERNAME` / `_PASSWORD` | `localhost:3306/xiaozhi`、`xiaozhi`、`123456` |
+| `SPRING_DATASOURCE_URL` / `_USERNAME` / `_PASSWORD` | `localhost:3306/voxai`、`voxai`、无默认值（Docker 部署时由 `MYSQL_PASSWORD` 传入） |
 | `SPRING_DATA_REDIS_HOST` / `_PORT` / `_PASSWORD` | `localhost`、`6379`、空 |
 
 Redis 没开 requirepass 时 `_PASSWORD` 必须留空，空串会被当口令发出去。
@@ -63,10 +63,10 @@ Redis 没开 requirepass 时 `_PASSWORD` 必须留空，空串会被当口令发
 | 变量 | 说明 |
 |------|------|
 | `HOST_IP` | 下发给设备的服务器 IP，留空自动探测 |
-| `XIAOZHI_SERVER_DOMAIN` | 对外域名。留空按 IP 拼地址；填了则下发 `https://<域名>/api/device/ota` 与 `wss://ws.<域名>/ws/xiaozhi/v1/`，要自己把子域名反代过去 |
-| `XIAOZHI_SECURITY_TRUSTED_PROXIES` | 前面挂 Nginx/LB 时填代理 IP 或 CIDR，否则限流会把所有请求算成同一个 IP |
+| `VOXAI_SERVER_DOMAIN` | 对外域名。留空按 IP 拼地址；填了则下发 `https://<域名>/api/device/ota` 与 `wss://ws.<域名>/ws/voxai/v1/`，要自己把子域名反代过去 |
+| `VOXAI_SECURITY_TRUSTED_PROXIES` | 前面挂 Nginx/LB 时填代理 IP 或 CIDR，否则限流会把所有请求算成同一个 IP |
 
-改了服务端口要同步改 `xiaozhi.server.port` 与 `xiaozhi.dialogue.port`，否则下发给设备的地址还是旧端口。
+改了服务端口要同步改 `voxai.server.port` 与 `voxai.dialogue.port`，否则下发给设备的地址还是旧端口。
 
 ### 安全相关的默认值
 
@@ -74,14 +74,14 @@ Redis 没开 requirepass 时 `_PASSWORD` 必须留空，空串会被当口令发
 
 | 变量 | 默认值 | 不改的后果 |
 |------|--------|-----------|
-| `XIAOZHI_DEVICE_AUTH_SECRET` | `xz-2026` | 任何人报一个 device-id 就能接进对话链路。server 与 dialogue 必须同值 |
-| `JWT_SECRET_KEY` | 内置字符串 | 后台登录 token 可被伪造 |
+| `VOXAI_DEVICE_AUTH_SECRET` | 空（鉴权关闭） | 任何人报一个 device-id 就能接进对话链路。server 与 dialogue 必须同值 |
+| `JWT_SECRET_KEY` | 内置字符串（已随源码公开） | 后台登录 token 可被任何人伪造，对外部署**必须**设置 |
 
 **存储与其它**
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
-| `XIAOZHI_DATA_DIR` | 空 | 录音与上传文件的根目录。server 与 dialogue 在不同目录启动时，**必须设成同一个绝对路径** |
+| `VOXAI_DATA_DIR` | 空 | 录音与上传文件的根目录。server 与 dialogue 在不同目录启动时，**必须设成同一个绝对路径** |
 | `EMAIL_SMTP_USERNAME` / `_PASSWORD` | 空 | 注册与找回密码的验证码邮件，不配则发信失败 |
 
 ## 可选组件

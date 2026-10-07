@@ -3,7 +3,7 @@
  */
 export default {
   common: {
-    appTitle: 'Connect Ai - 智能物联网管理平台',
+    appTitle: 'voxAI Node - 智能物联网管理平台',
     confirm: '确定',
     cancel: '取消',
     save: '保存',

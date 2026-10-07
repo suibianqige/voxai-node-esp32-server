@@ -16,9 +16,9 @@ export interface WebSocketConfig {
   deviceName?: string
 }
 
-// 设备 WebSocket 由对话进程（xiaozhi-dialogue）提供，端口与 API 进程不同；
+// 设备 WebSocket 由对话进程（voxai-dialogue）提供，端口与 API 进程不同；
 // 路径尾斜杠是后端 AntPathMatcher 的硬要求，services/websocket.ts 连接前会补齐
-const WS_PATH = '/ws/xiaozhi/v1/'
+const WS_PATH = '/ws/voxai/v1/'
 
 // 未配置 VITE_WS_URL 时按当前页面地址推导，由前置的 nginx/vite 代理转给 dialogue。
 // 同一份构建产物因此能在任意 IP、域名、端口下直接用，换地址不必重新打包；

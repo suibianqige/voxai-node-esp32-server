@@ -25,9 +25,9 @@ docker compose -f docker-compose-db.yml up -d   # MySQL + Redis
 用了上面的 compose 就已经建好，可跳过。自己装的 MySQL 执行：
 
 ```sql
-CREATE DATABASE xiaozhi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'xiaozhi'@'localhost' IDENTIFIED BY '123456';
-GRANT ALL PRIVILEGES ON xiaozhi.* TO 'xiaozhi'@'localhost';
+CREATE DATABASE voxai CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'voxai'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON voxai.* TO 'voxai'@'localhost';
 FLUSH PRIVILEGES;
 ```
 

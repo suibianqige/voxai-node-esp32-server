@@ -31,7 +31,7 @@ interface AgentViewState {
   }
 }
 
-const agent = { configId: 7, agentName: '小智' } as Agent
+const agent = { configId: 7, agentName: 'VoxAI' } as Agent
 
 const platformForm = {
   configType: 'agent',
@@ -82,7 +82,7 @@ describe('AgentView 请求处理', () => {
     await view.handleSetDefault(agent)
 
     expect(configApiMock.updateConfig).toHaveBeenCalledWith({ configId: 7, isDefault: '1' })
-    expect(message.success).toHaveBeenCalledWith('common.setDefaultSuccess:{"name":"小智"}')
+    expect(message.success).toHaveBeenCalledWith('common.setDefaultSuccess:{"name":"VoxAI"}')
     expect(agentApiMock.queryAgents).toHaveBeenCalled()
   })
 

@@ -10,11 +10,11 @@ LOGS_DIR="$ROOT_DIR/logs"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
 CYAN='\033[0;36m'; BLUE='\033[0;34m'; BOLD='\033[1m'; NC='\033[0m'
 
-_log()  { echo -e "${GREEN}[xiaozhi]${NC} $*"; }
-_info() { echo -e "${CYAN}[xiaozhi]${NC} $*"; }
-_warn() { echo -e "${YELLOW}[xiaozhi]${NC} $*"; }
-_err()  { echo -e "${RED}[xiaozhi]${NC} $*" >&2; }
-_ok()   { echo -e "${GREEN}[xiaozhi]${NC} ${BOLD}$*${NC}"; }
+_log()  { echo -e "${GREEN}[voxai]${NC} $*"; }
+_info() { echo -e "${CYAN}[voxai]${NC} $*"; }
+_warn() { echo -e "${YELLOW}[voxai]${NC} $*"; }
+_err()  { echo -e "${RED}[voxai]${NC} $*" >&2; }
+_ok()   { echo -e "${GREEN}[voxai]${NC} ${BOLD}$*${NC}"; }
 
 # ---- 控制台重定向文件轮转 ----
 # Logback 自己的 FILE/ERROR_FILE 有 rollingPolicy，但 nohup 重定向出去的 .out 是纯 append，
@@ -157,11 +157,11 @@ build() {
 }
 
 # ---- 查找 jar ----
-# xiaozhi-dialogue 使用 classifier=exec，产出 *-exec.jar；其余模块用普通 jar
+# voxai-dialogue 使用 classifier=exec，产出 *-exec.jar；其余模块用普通 jar
 # 优先在 $ROOT_DIR 根目录查找（部署模式），找不到再回退到 $module/target/（开发模式）
 find_jar() {
   local module="$1" jar=""
-  if [[ "$module" == "xiaozhi-dialogue" ]]; then
+  if [[ "$module" == "voxai-dialogue" ]]; then
     jar=$(ls "$ROOT_DIR/$module"-*-exec.jar 2>/dev/null | head -1)
     [[ -z "$jar" ]] && jar=$(ls "$ROOT_DIR/$module/target/$module"-*-exec.jar 2>/dev/null | head -1)
   else
@@ -206,9 +206,9 @@ start_service() {
   fi
 
   # 未设置时设备握手鉴权关闭，本地联调可用，生产部署必须导出
-  if [[ -z "${XIAOZHI_DEVICE_AUTH_SECRET:-}" ]]; then
-    _warn "未设置 XIAOZHI_DEVICE_AUTH_SECRET，$name 的设备握手鉴权处于关闭状态"
-    _warn "  生产部署前导出：export XIAOZHI_DEVICE_AUTH_SECRET=\$(openssl rand -hex 16)"
+  if [[ -z "${VOXAI_DEVICE_AUTH_SECRET:-}" ]]; then
+    _warn "未设置 VOXAI_DEVICE_AUTH_SECRET，$name 的设备握手鉴权处于关闭状态"
+    _warn "  生产部署前导出：export VOXAI_DEVICE_AUTH_SECRET=\$(openssl rand -hex 16)"
     _warn "  server 与 dialogue 必须使用同一个值"
   fi
 
@@ -301,7 +301,7 @@ follow_logs() {
       _warn "$name 尚无控制台日志 (logs/$name.out)"
       continue
     fi
-    tag="$(printf '%b' "${colors[i % ${#colors[@]}]}[${name#xiaozhi-}]${NC} ")"
+    tag="$(printf '%b' "${colors[i % ${#colors[@]}]}[${name#voxai-}]${NC} ")"
     if [[ -n "${!var:-}" ]]; then
       tail -c "+$(( ${!var} + 1 ))" -F "$file" 2>/dev/null > >(awk -v tag="$tag" '{ print tag $0; fflush() }') &
     else

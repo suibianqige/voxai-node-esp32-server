@@ -29,21 +29,21 @@ COPY repo/ ./repo/
 
 # 先复制所有 pom.xml 以利用 Docker 缓存（依赖不变时跳过下载）
 COPY pom.xml ./
-COPY xiaozhi-common/pom.xml  ./xiaozhi-common/
-COPY xiaozhi-service/pom.xml ./xiaozhi-service/
-COPY xiaozhi-ai/pom.xml      ./xiaozhi-ai/
-COPY xiaozhi-dialogue/pom.xml ./xiaozhi-dialogue/
-COPY xiaozhi-server/pom.xml  ./xiaozhi-server/
+COPY voxai-common/pom.xml  ./voxai-common/
+COPY voxai-service/pom.xml ./voxai-service/
+COPY voxai-ai/pom.xml      ./voxai-ai/
+COPY voxai-dialogue/pom.xml ./voxai-dialogue/
+COPY voxai-server/pom.xml  ./voxai-server/
 
 # 预下载依赖（单独一层，源码变更时不重复下载）
-RUN mvn -Dmaven.repo.local=/root/.m2/repository dependency:go-offline -DexcludeGroupIds=com.xiaozhi || true
+RUN mvn -Dmaven.repo.local=/root/.m2/repository dependency:go-offline -DexcludeGroupIds=com.voxai || true
 
 # 复制所有模块源代码
-COPY xiaozhi-common/src  ./xiaozhi-common/src
-COPY xiaozhi-service/src ./xiaozhi-service/src
-COPY xiaozhi-ai/src      ./xiaozhi-ai/src
-COPY xiaozhi-dialogue/src ./xiaozhi-dialogue/src
-COPY xiaozhi-server/src  ./xiaozhi-server/src
+COPY voxai-common/src  ./voxai-common/src
+COPY voxai-service/src ./voxai-service/src
+COPY voxai-ai/src      ./voxai-ai/src
+COPY voxai-dialogue/src ./voxai-dialogue/src
+COPY voxai-server/src  ./voxai-server/src
 
 # 构建整个多模块项目：镜像构建没有接到 CI 门禁，这里不跳过测试，
 # 避免测试不过的提交也能被直接打包成可运行镜像
@@ -110,37 +110,37 @@ ENV LD_LIBRARY_PATH=/app/lib:$LD_LIBRARY_PATH
 ENV TZ=Asia/Shanghai
 
 # ============================================================
-# xiaozhi-server（管理后台 API，端口 8091）
+# voxai-server（管理后台 API，端口 8091）
 # 构建: docker build --target server ...
 # ============================================================
 FROM runtime-base AS server
 
-COPY --from=builder /build/xiaozhi-server/target/xiaozhi-server-*.jar /app/xiaozhi-server.jar
+COPY --from=builder /build/voxai-server/target/voxai-server-*.jar /app/voxai-server.jar
 
 RUN echo '#!/bin/bash\n\
-echo "Starting xiaozhi-server"\n\
+echo "Starting voxai-server"\n\
 java -Xms512m -Xmx1024m -XX:MaxDirectMemorySize=256m \\\n\
   -Dsherpa_onnx.native.path=/app/lib \\\n\
   -Djava.library.path=/app/lib \\\n\
-  -jar /app/xiaozhi-server.jar\n\
+  -jar /app/voxai-server.jar\n\
 ' > /app/start.sh && chmod +x /app/start.sh
 
 CMD ["/bin/bash", "/app/start.sh"]
 
 # ============================================================
-# xiaozhi-dialogue（设备对话服务，端口 8092）
+# voxai-dialogue（设备对话服务，端口 8092）
 # 构建: docker build --target dialogue ...
 # ============================================================
 FROM runtime-base AS dialogue
 
-COPY --from=builder /build/xiaozhi-dialogue/target/xiaozhi-dialogue-*-exec.jar /app/xiaozhi-dialogue.jar
+COPY --from=builder /build/voxai-dialogue/target/voxai-dialogue-*-exec.jar /app/voxai-dialogue.jar
 
 RUN echo '#!/bin/bash\n\
-echo "Starting xiaozhi-dialogue"\n\
+echo "Starting voxai-dialogue"\n\
 java -Xms512m -Xmx768m -XX:MaxDirectMemorySize=256m \\\n\
   -Dsherpa_onnx.native.path=/app/lib \\\n\
   -Djava.library.path=/app/lib \\\n\
-  -jar /app/xiaozhi-dialogue.jar\n\
+  -jar /app/voxai-dialogue.jar\n\
 ' > /app/start.sh && chmod +x /app/start.sh
 
 CMD ["/bin/bash", "/app/start.sh"]

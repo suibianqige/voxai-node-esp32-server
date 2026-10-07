@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # =============================================================================
-# xiaozhi-dialogue 管理脚本
+# voxai-dialogue 管理脚本
 # 用法: bin/dialogue.sh <start|stop|restart|status|logs> [dev|prod]，运行环境默认 dev
 # =============================================================================
 source "$(cd "$(dirname "$0")" && pwd)/_common.sh"
 
-NAME="xiaozhi-dialogue"
-MODULE="xiaozhi-dialogue"
+NAME="voxai-dialogue"
+MODULE="voxai-dialogue"
 PORT=8092
 
 case "${1:-}" in

@@ -13,7 +13,7 @@ Docker Desktop 的内存配额太小（默认可能只有 2GB，而 server 与 d
 Settings → Resources 调到 8GB。当前配额：`docker info | grep -i "total memory"`。
 
 **拉镜像失败（manifest unknown / 超时）**
-改用[源码构建](./DOCKER.md#从源码构建)，或在 `.env` 里用 `XIAOZHI_IMAGE_SERVER` 等指向自己的镜像仓库。
+改用[源码构建](./DOCKER.md#从源码构建)，或在 `.env` 里用 `VOXAI_IMAGE_SERVER` 等指向自己的镜像仓库。
 
 **端口被占用**
 在 `.env` 里改 `WEB_PORT` / `SERVER_PORT` / `DIALOGUE_PORT`。

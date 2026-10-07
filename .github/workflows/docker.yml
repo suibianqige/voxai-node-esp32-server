@@ -29,22 +29,22 @@ permissions:
 
 jobs:
   build:
-    if: github.repository == 'joey-zhou/xiaozhi-esp32-server-java'
+    if: github.repository == 'your-org/voxai'
     runs-on: ubuntu-latest
     timeout-minutes: 180
     strategy:
       fail-fast: false
       matrix:
         include:
-          - image: xiaozhi-server
+          - image: voxai-server
             dockerfile: Dockerfile-server
             context: .
             target: server
-          - image: xiaozhi-dialogue
+          - image: voxai-dialogue
             dockerfile: Dockerfile-server
             context: .
             target: dialogue
-          - image: xiaozhi-web
+          - image: voxai-web
             dockerfile: Dockerfile-web
             context: ./web
             target: ''

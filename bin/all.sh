@@ -10,38 +10,38 @@ case "${1:-}" in
     PROFILE="$(resolve_profile "${2:-}")" || exit 1
     preflight || exit 1
     build all
-    start_service "xiaozhi-server"   "xiaozhi-server"   8091 "$PROFILE"
-    start_service "xiaozhi-dialogue" "xiaozhi-dialogue" 8092 "$PROFILE"
+    start_service "voxai-server"   "voxai-server"   8091 "$PROFILE"
+    start_service "voxai-dialogue" "voxai-dialogue" 8092 "$PROFILE"
     echo ""
     _ok "全部启动完成"
-    follow_logs_if_tty "xiaozhi-server" "xiaozhi-dialogue"
+    follow_logs_if_tty "voxai-server" "voxai-dialogue"
     ;;
   stop)
-    stop_service "xiaozhi-server"
-    stop_service "xiaozhi-dialogue"
+    stop_service "voxai-server"
+    stop_service "voxai-dialogue"
     _ok "全部已停止"
     ;;
   restart)
     PROFILE="$(resolve_profile "${2:-}")" || exit 1
     preflight || exit 1
-    stop_service "xiaozhi-server"
-    stop_service "xiaozhi-dialogue"
+    stop_service "voxai-server"
+    stop_service "voxai-dialogue"
     sleep 1
     build all
-    start_service "xiaozhi-server"   "xiaozhi-server"   8091 "$PROFILE"
-    start_service "xiaozhi-dialogue" "xiaozhi-dialogue" 8092 "$PROFILE"
+    start_service "voxai-server"   "voxai-server"   8091 "$PROFILE"
+    start_service "voxai-dialogue" "voxai-dialogue" 8092 "$PROFILE"
     echo ""
     _ok "全部重启完成"
-    follow_logs_if_tty "xiaozhi-server" "xiaozhi-dialogue"
+    follow_logs_if_tty "voxai-server" "voxai-dialogue"
     ;;
   status)
     echo ""
-    status_service "xiaozhi-server"   8091
-    status_service "xiaozhi-dialogue" 8092
+    status_service "voxai-server"   8091
+    status_service "voxai-dialogue" 8092
     echo ""
     ;;
   logs)
-    follow_logs "xiaozhi-server" "xiaozhi-dialogue"
+    follow_logs "voxai-server" "voxai-dialogue"
     ;;
   *)
     usage "bin/all.sh"

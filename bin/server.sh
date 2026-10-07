@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # =============================================================================
-# xiaozhi-server 管理脚本
+# voxai-server 管理脚本
 # 用法: bin/server.sh <start|stop|restart|status|logs> [dev|prod]，运行环境默认 dev
 # =============================================================================
 source "$(cd "$(dirname "$0")" && pwd)/_common.sh"
 
-NAME="xiaozhi-server"
-MODULE="xiaozhi-server"
+NAME="voxai-server"
+MODULE="voxai-server"
 PORT=8091
 
 case "${1:-}" in

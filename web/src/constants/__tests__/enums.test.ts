@@ -5,7 +5,7 @@ import * as enums from '../enums'
 const { DeviceState } = enums
 
 describe('DeviceState', () => {
-  // 真源 xiaozhi-common/.../model/bo/DeviceBO.java:11-15
+  // 真源 voxai-common/.../model/bo/DeviceBO.java:11-15
   // 与 V1__init.sql sys_device.state enum('0','1','2')
   it('是字符串枚举，含待机态', () => {
     expect(DeviceState.OFFLINE).toBe('0')

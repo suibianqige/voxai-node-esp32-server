@@ -8,13 +8,13 @@ on:
     branches: [main]
     paths:
       - 'pom.xml'
-      - 'xiaozhi-*/**'
+      - 'voxai-*/**'
       - 'repo/**'
       - '.github/workflows/backend.yml'
   pull_request:
     paths:
       - 'pom.xml'
-      - 'xiaozhi-*/**'
+      - 'voxai-*/**'
       - 'repo/**'
       - '.github/workflows/backend.yml'
   workflow_dispatch:
@@ -32,26 +32,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     # 与 docker-compose 一致：应用账号只有库级权限，脚本里需要全局权限的语句会失败；
-    # 库名故意不叫 xiaozhi，脚本里写死库名也会失败
+    # 库名故意不叫 voxai，脚本里写死库名也会失败
     services:
       mysql:
         image: mysql:8.0-debian
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: xiaozhi_ci
-          MYSQL_USER: xiaozhi
+          MYSQL_DATABASE: voxai_ci
+          MYSQL_USER: voxai
           MYSQL_PASSWORD: '123456'
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -uxiaozhi -p123456"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uvoxai -p123456"
           --health-interval=5s
           --health-timeout=5s
           --health-retries=30
     env:
-      XIAOZHI_MIGRATION_TEST_URL: jdbc:mysql://127.0.0.1:3306/xiaozhi_ci?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      XIAOZHI_MIGRATION_TEST_USERNAME: xiaozhi
-      XIAOZHI_MIGRATION_TEST_PASSWORD: '123456'
+      VOXAI_MIGRATION_TEST_URL: jdbc:mysql://127.0.0.1:3306/voxai_ci?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      VOXAI_MIGRATION_TEST_USERNAME: voxai
+      VOXAI_MIGRATION_TEST_PASSWORD: '123456'
     steps:
       - uses: actions/checkout@v4
 

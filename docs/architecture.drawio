@@ -19,7 +19,7 @@
         <mxCell id="group-server" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f0ff;strokeColor=#4472C4;strokeWidth=2;shadow=1;arcSize=6;dashed=0;" value="" vertex="1">
           <mxGeometry height="210" width="600" x="40" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="server-title" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#1a56db;align=left;verticalAlign=middle;" value="xiaozhi-server  :8091" vertex="1">
+        <mxCell id="server-title" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#1a56db;align=left;verticalAlign=middle;" value="voxai-server  :8091" vertex="1">
           <mxGeometry height="28" width="250" x="55" y="256" as="geometry" />
         </mxCell>
         <mxCell id="server-desc" parent="1" style="text;fontSize=11;fontColor=#666666;align=left;" value="管理后台 · Spring Boot + Tomcat" vertex="1">
@@ -55,7 +55,7 @@
         <mxCell id="group-dialogue" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#E07020;strokeWidth=2;shadow=1;arcSize=6;" value="" vertex="1">
           <mxGeometry height="210" width="620" x="670" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="dialogue-title" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#c05717;align=left;verticalAlign=middle;" value="xiaozhi-dialogue  :8092" vertex="1">
+        <mxCell id="dialogue-title" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#c05717;align=left;verticalAlign=middle;" value="voxai-dialogue  :8092" vertex="1">
           <mxGeometry height="28" width="250" x="685" y="256" as="geometry" />
         </mxCell>
         <mxCell id="dialogue-desc" parent="1" style="text;fontSize=11;fontColor=#666666;align=left;" value="对话服务 · Netty + WebSocket + MQTT" vertex="1">
@@ -115,19 +115,19 @@
         <mxCell id="label-modules" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#555555;align=left;" value="公共模块（Maven 依赖链）" vertex="1">
           <mxGeometry height="25" width="280" x="40" y="490" as="geometry" />
         </mxCell>
-        <mxCell id="mod-ai" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="xiaozhi-ai" vertex="1">
+        <mxCell id="mod-ai" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="voxai-ai" vertex="1">
           <mxGeometry height="40" width="400" x="40" y="520" as="geometry" />
         </mxCell>
         <mxCell id="mod-ai-sub" parent="1" style="text;fontSize=10;fontColor=#777;align=left;whiteSpace=wrap;" value="LLM (Spring AI)  ·  STT  ·  TTS  ·  记忆管理  ·  视觉模型  ·  声纹识别  ·  意图检测  ·  工具调用  ·  RAG 知识库  ·  MCP 协议" vertex="1">
           <mxGeometry height="18" width="500" x="40" y="565" as="geometry" />
         </mxCell>
-        <mxCell id="mod-service" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="xiaozhi-service" vertex="1">
+        <mxCell id="mod-service" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="voxai-service" vertex="1">
           <mxGeometry height="40" width="350" x="536" y="520" as="geometry" />
         </mxCell>
         <mxCell id="mod-service-sub" parent="1" style="text;fontSize=10;fontColor=#777;align=left;whiteSpace=wrap;" value="实体 / Mapper (MyBatis-Plus)  ·  业务 Service  ·  对象存储  ·  监控指标 (Micrometer)" vertex="1">
           <mxGeometry height="18" width="460" x="536" y="565" as="geometry" />
         </mxCell>
-        <mxCell id="mod-common" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="xiaozhi-common" vertex="1">
+        <mxCell id="mod-common" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="voxai-common" vertex="1">
           <mxGeometry height="40" width="290" x="1000" y="520" as="geometry" />
         </mxCell>
         <mxCell id="mod-common-sub" parent="1" style="text;fontSize=10;fontColor=#777;align=left;whiteSpace=wrap;" value="Entity / DTO / Event  ·  Redis / Redisson  ·  Sa-Token  ·  音频 Opus / MP3" vertex="1">

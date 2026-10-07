@@ -17,13 +17,13 @@ import {
 } from '../api'
 
 describe('用户名/密码约束对齐后端校验注解', () => {
-  // 真源 xiaozhi-common/.../req/UserRegisterReq.java:24 @Size(min = 6, max = 20)
+  // 真源 voxai-common/.../req/UserRegisterReq.java:24 @Size(min = 6, max = 20)
   it('密码长度取 UserRegisterReq.password 的 @Size', () => {
     expect(PASSWORD_MIN_LENGTH).toBe(6)
     expect(PASSWORD_MAX_LENGTH).toBe(20)
   })
 
-  // 真源 xiaozhi-common/.../req/UserRegisterReq.java:19 @Size(min = 3, max = 20)
+  // 真源 voxai-common/.../req/UserRegisterReq.java:19 @Size(min = 3, max = 20)
   it('用户名长度取 UserRegisterReq.username 的 @Size', () => {
     expect(USERNAME_MIN_LENGTH).toBe(3)
     expect(USERNAME_MAX_LENGTH).toBe(20)
@@ -45,7 +45,7 @@ describe('用户名/密码约束对齐后端校验注解', () => {
     expect(VALIDATION_RULES.PASSWORD_PATTERN.test(`${'a'.repeat(20)}1`)).toBe(false)
   })
 
-  // 真源 xiaozhi-common/.../req/UserRegisterReq.java:37 @Pattern(regexp = "^1[3-9]\\d{9}$")
+  // 真源 voxai-common/.../req/UserRegisterReq.java:37 @Pattern(regexp = "^1[3-9]\\d{9}$")
   it('手机号正则与 UserRegisterReq.tel 的 @Pattern 一致', () => {
     expect(VALIDATION_RULES.PHONE_PATTERN.source).toBe('^1[3-9]\\d{9}$')
   })

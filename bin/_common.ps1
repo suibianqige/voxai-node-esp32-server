@@ -9,11 +9,11 @@ $RootDir = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $LogsDir = Join-Path $RootDir 'logs'
 
 # ---- 日志输出 ----
-function Write-XzLog  { param([string]$Msg) Write-Host "[xiaozhi] $Msg" -ForegroundColor Green }
-function Write-XzInfo { param([string]$Msg) Write-Host "[xiaozhi] $Msg" -ForegroundColor Cyan }
-function Write-XzWarn { param([string]$Msg) Write-Host "[xiaozhi] $Msg" -ForegroundColor Yellow }
-function Write-XzErr  { param([string]$Msg) Write-Host "[xiaozhi] $Msg" -ForegroundColor Red }
-function Write-XzOk   { param([string]$Msg) Write-Host "[xiaozhi] $Msg" -ForegroundColor Green }
+function Write-XzLog  { param([string]$Msg) Write-Host "[voxai] $Msg" -ForegroundColor Green }
+function Write-XzInfo { param([string]$Msg) Write-Host "[voxai] $Msg" -ForegroundColor Cyan }
+function Write-XzWarn { param([string]$Msg) Write-Host "[voxai] $Msg" -ForegroundColor Yellow }
+function Write-XzErr  { param([string]$Msg) Write-Host "[voxai] $Msg" -ForegroundColor Red }
+function Write-XzOk   { param([string]$Msg) Write-Host "[voxai] $Msg" -ForegroundColor Green }
 
 # ---- 部署模式检测 ----
 # 部署模式：$RootDir 下没有 pom.xml（纯 jar 部署）或没有 mvn 命令
@@ -156,12 +156,12 @@ function Invoke-Build {
 }
 
 # ---- 查找 jar ----
-# xiaozhi-dialogue 使用 classifier=exec，产出 *-exec.jar；其余模块用普通 jar
+# voxai-dialogue 使用 classifier=exec，产出 *-exec.jar；其余模块用普通 jar
 # 优先在 $RootDir 根目录查找（部署模式），找不到再回退到 $module\target\（开发模式）
 function Find-Jar {
     param([string]$Module)
 
-    if ($Module -eq 'xiaozhi-dialogue') {
+    if ($Module -eq 'voxai-dialogue') {
         $jar = Get-ChildItem -Path (Join-Path $RootDir "$Module-*-exec.jar") -ErrorAction SilentlyContinue |
                Select-Object -First 1
         if (-not $jar) {
@@ -211,9 +211,9 @@ function Start-XzService {
     }
 
     # 未设置时设备握手鉴权关闭，本地联调可用，生产部署必须设置
-    if ($null -eq (Get-Item Env:XIAOZHI_DEVICE_AUTH_SECRET -ErrorAction SilentlyContinue)) {
-        Write-XzWarn "未设置 XIAOZHI_DEVICE_AUTH_SECRET，$Name 的设备握手鉴权处于关闭状态"
-        Write-XzWarn '  设置方式: $env:XIAOZHI_DEVICE_AUTH_SECRET = "<32位十六进制随机串>"'
+    if ($null -eq (Get-Item Env:VOXAI_DEVICE_AUTH_SECRET -ErrorAction SilentlyContinue)) {
+        Write-XzWarn "未设置 VOXAI_DEVICE_AUTH_SECRET，$Name 的设备握手鉴权处于关闭状态"
+        Write-XzWarn '  设置方式: $env:VOXAI_DEVICE_AUTH_SECRET = "<32位十六进制随机串>"'
         Write-XzWarn '  server 与 dialogue 必须使用同一个值'
     }
 

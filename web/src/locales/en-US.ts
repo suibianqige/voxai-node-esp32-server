@@ -3,7 +3,7 @@
  */
 export default {
   common: {
-    appTitle: 'Connect Ai - IoT Management Platform',
+    appTitle: 'voxAI Node - IoT Management Platform',
     confirm: 'Confirm',
     cancel: 'Cancel',
     save: 'Save',

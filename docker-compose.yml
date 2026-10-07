@@ -1,6 +1,6 @@
 # 一键启动：docker compose up -d
 # 默认拉已发布镜像；源码构建见 docker-compose.build.yml，可调项见 .env.example
-name: xiaozhi
+name: voxai
 
 # 限制容器日志大小，避免撑满磁盘
 x-logging: &default-logging
@@ -12,14 +12,14 @@ x-logging: &default-logging
 # server 与 dialogue 共用的环境变量
 x-app-environment: &app-environment
   SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
-  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-xiaozhi}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
-  SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-xiaozhi}
-  SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-123456}
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-voxai}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+  SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-voxai}
+  SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:?请在 .env 中设置 MYSQL_PASSWORD（无默认值）}
   SPRING_DATA_REDIS_HOST: redis
   # 下发给设备的服务器 IP，留空则自动探测
   HOST_IP: ${HOST_IP:-}
   # 设备接入鉴权密钥，留空等于不设防
-  XIAOZHI_DEVICE_AUTH_SECRET: ${XIAOZHI_DEVICE_AUTH_SECRET:-}
+  VOXAI_DEVICE_AUTH_SECRET: ${VOXAI_DEVICE_AUTH_SECRET:-}
   TZ: ${TZ:-Asia/Shanghai}
 
 services:
@@ -29,10 +29,10 @@ services:
     ports:
       - "127.0.0.1:${MYSQL_PORT:-13306}:3306"  # 只监听回环
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-abc123456}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-xiaozhi}
-      MYSQL_USER: ${MYSQL_USER:-xiaozhi}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-123456}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?请在 .env 中设置 MYSQL_ROOT_PASSWORD（无默认值）}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-voxai}
+      MYSQL_USER: ${MYSQL_USER:-voxai}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?请在 .env 中设置 MYSQL_PASSWORD（无默认值）}
       LANG: C.UTF-8
       MYSQL_CHARSET: utf8mb4
       MYSQL_COLLATION: utf8mb4_unicode_ci
@@ -46,7 +46,7 @@ services:
       retries: 10
       start_period: 40s
     networks:
-      - xiaozhi
+      - voxai
     logging: *default-logging
 
   redis:
@@ -62,7 +62,7 @@ services:
       retries: 5
       start_period: 10s
     networks:
-      - xiaozhi
+      - voxai
     logging: *default-logging
     deploy:
       resources:
@@ -74,8 +74,8 @@ services:
           memory: 128M
 
   server:
-    image: ${XIAOZHI_IMAGE_SERVER:-ghcr.io/joey-zhou/xiaozhi-server}:${XIAOZHI_TAG:-latest}
-    container_name: xiaozhi-server
+    image: ${VOXAI_IMAGE_SERVER:-ghcr.io/your-org/voxai-server}:${VOXAI_TAG:-latest}
+    container_name: voxai-server
     restart: always
     depends_on:
       mysql:
@@ -97,7 +97,7 @@ services:
       retries: 10
       start_period: 90s  # 首次启动要跑完 Flyway 建表
     networks:
-      - xiaozhi
+      - voxai
     logging: *default-logging
     deploy:
       resources:
@@ -109,8 +109,8 @@ services:
           memory: 512M
 
   dialogue:
-    image: ${XIAOZHI_IMAGE_DIALOGUE:-ghcr.io/joey-zhou/xiaozhi-dialogue}:${XIAOZHI_TAG:-latest}
-    container_name: xiaozhi-dialogue
+    image: ${VOXAI_IMAGE_DIALOGUE:-ghcr.io/your-org/voxai-dialogue}:${VOXAI_TAG:-latest}
+    container_name: voxai-dialogue
     restart: always
     depends_on:
       mysql:
@@ -134,7 +134,7 @@ services:
       retries: 10
       start_period: 60s
     networks:
-      - xiaozhi
+      - voxai
     logging: *default-logging
     deploy:
       resources:
@@ -146,8 +146,8 @@ services:
           memory: 512M
 
   web:
-    image: ${XIAOZHI_IMAGE_WEB:-ghcr.io/joey-zhou/xiaozhi-web}:${XIAOZHI_TAG:-latest}
-    container_name: xiaozhi-web
+    image: ${VOXAI_IMAGE_WEB:-ghcr.io/your-org/voxai-web}:${VOXAI_TAG:-latest}
+    container_name: voxai-web
     restart: always
     depends_on:
       - server
@@ -161,12 +161,12 @@ services:
       retries: 5
       start_period: 10s
     networks:
-      - xiaozhi
+      - voxai
     logging: *default-logging
 
 networks:
-  xiaozhi:
-    name: xiaozhi-network
+  voxai:
+    name: voxai-network
 
 volumes:
   mysql_data:

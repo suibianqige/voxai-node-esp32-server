@@ -1,5 +1,18 @@
 # 变更日志
 
+## [Unreleased] - 2026-10-06 品牌化改造（商用分叉基线）
+
+- 项目品牌由 xiaozhi-esp32-server-java 更名为 **VoxAI**（占位名，待正式品牌确定后全局替换）
+- Maven 坐标：`com.xiaozhi:xiaozhi-*` → `com.voxai:voxai-*`，Java 包名 `com.xiaozhi` → `com.voxai`
+- 设备 WebSocket 路径：`/ws/xiaozhi/v1/` → `/ws/voxai/v1/`（**已配旧地址的设备需重新下发接入地址**）
+- 数据库名/用户名：`xiaozhi` → `voxai`
+- 配置前缀：`xiaozhi.*` → `voxai.*`，环境变量 `XIAOZHI_*` → `VOXAI_*`
+- **安全默认值收紧**：
+  - `MYSQL_PASSWORD` / `MYSQL_ROOT_PASSWORD` 不再有默认值，必须显式设置
+  - 移除设备鉴权密钥的内置兜底值 `xz-2026`，未设置即为关闭鉴权（启动时告警）
+- 新增 `NOTICE` 文件声明上游衍生关系（MIT），移除原作者个人社交链接与二维码资源
+- 上游 6.1.0 之前的变更记录见下方历史日志
+
 ## [6.1.0] - 2026-09-19
 
 ### 💥 升级注意
@@ -49,8 +62,8 @@
 
 ### 💥 升级注意
 
-- **Docker 数据卷会换名**。compose 现在固定项目名 `xiaozhi`，卷名从 `<所在目录名>_mysql_data`
-  变成 `xiaozhi_mysql_data`。老部署直接 `docker compose up -d` 会挂到新的空卷上，数据看着像丢了
+- **Docker 数据卷会换名**。compose 现在固定项目名 `voxai`，卷名从 `<所在目录名>_mysql_data`
+  变成 `voxai_mysql_data`。老部署直接 `docker compose up -d` 会挂到新的空卷上，数据看着像丢了
   （实际仍在旧卷里）。要继续用旧卷，升级前在 `.env` 里写 `COMPOSE_PROJECT_NAME=<原来的目录名>`。
 - **compose 服务与文件改名**：服务 `node` → `web`，`Dockerfile-node` → `Dockerfile-web`。
   主 compose 默认拉 GHCR 镜像，从源码构建改为 `-f docker-compose.yml -f docker-compose.build.yml`。
@@ -60,7 +73,7 @@
   或继续用 `VITE_WS_URL` 指定绝对地址。
 
 ### 架构与规约
-- refactor: 读写两条路径分开——读侧 Service 直接出 BO/投影，Resp 组装收回 xiaozhi-server；写侧走 AppService → 聚合根 → Repository
+- refactor: 读写两条路径分开——读侧 Service 直接出 BO/投影，Resp 组装收回 voxai-server；写侧走 AppService → 聚合根 → Repository
 - refactor: template 包降级，写路径收进 ServiceImpl（Mapper + MapStruct `updateDO`）
 - refactor: 分页信封统一 `PageResult`，Req/DO 不再越过 Service 层
 - refactor: 删除只做一行转发的 AppService、零调用的 Convert 方法与 `AuthUtils`
@@ -109,8 +122,8 @@
 
 ### 💥 重大变更
 - **refactor!: 项目拆分为多模块架构** 
-  - 从单体项目重构为 Maven 多模块：`xiaozhi-common`、`xiaozhi-service`、`xiaozhi-ai`、`xiaozhi-dialogue`、`xiaozhi-server`
-  - 模块间通过窄接口解耦（AI 模块仍依赖 xiaozhi-service，包括两个 Mapper 直连）
+  - 从单体项目重构为 Maven 多模块：`voxai-common`、`voxai-service`、`voxai-ai`、`voxai-dialogue`、`voxai-server`
+  - 模块间通过窄接口解耦（AI 模块仍依赖 voxai-service，包括两个 Mapper 直连）
   - Web 组件从 common 迁移至 server 模块，职责更清晰
 
 ### 新增功能
@@ -314,7 +327,7 @@
   - Conversation 接口优化
 - refactor: LLM 工具调用优化
   - ToolsGlobalRegistry 改进
-  - XiaoZhiToolCallingManager 重构
+  - VoxAIToolCallingManager 重构
   - 新增 NewChatFunction
 - refactor: STT 服务优化
   - 所有 STT 提供商代码优化
