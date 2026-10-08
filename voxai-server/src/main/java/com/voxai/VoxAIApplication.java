@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
     "com.voxai.userauth",
     "com.voxai.verifycode",
     "com.voxai.task",
-    // voxai-ai
+    // voxai-agent
     "com.voxai.ai",
     // voxai-server
     "com.voxai.file",

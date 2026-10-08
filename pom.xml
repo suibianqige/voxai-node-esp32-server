@@ -16,7 +16,7 @@
     <modules>
         <module>voxai-common</module>
         <module>voxai-service</module>
-        <module>voxai-ai</module>
+        <module>voxai-agent</module>
         <module>voxai-dialogue</module>
         <module>voxai-server</module>
     </modules>
@@ -106,7 +106,7 @@
             </dependency>
             <dependency>
                 <groupId>com.voxai</groupId>
-                <artifactId>voxai-ai</artifactId>
+                <artifactId>voxai-agent</artifactId>
                 <version>${voxai.version}</version>
             </dependency>
             <dependency>

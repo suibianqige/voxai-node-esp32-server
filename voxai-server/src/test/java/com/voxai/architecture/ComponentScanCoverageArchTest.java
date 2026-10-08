@@ -42,11 +42,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ComponentScanCoverageArchTest {
 
     private static final String[] SERVER_RUNTIME_MODULES = {
-        "/voxai-common/", "/voxai-service/", "/voxai-ai/", "/voxai-server/"
+        "/voxai-common/", "/voxai-service/", "/voxai-agent/", "/voxai-server/"
     };
 
     private static final String[] DIALOGUE_RUNTIME_MODULES = {
-        "/voxai-common/", "/voxai-service/", "/voxai-ai/", "/voxai-dialogue/"
+        "/voxai-common/", "/voxai-service/", "/voxai-agent/", "/voxai-dialogue/"
     };
 
     /**

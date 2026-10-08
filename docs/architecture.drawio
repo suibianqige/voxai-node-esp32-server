@@ -115,7 +115,7 @@
         <mxCell id="label-modules" parent="1" style="text;fontSize=14;fontStyle=1;fontColor=#555555;align=left;" value="公共模块（Maven 依赖链）" vertex="1">
           <mxGeometry height="25" width="280" x="40" y="490" as="geometry" />
         </mxCell>
-        <mxCell id="mod-ai" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="voxai-ai" vertex="1">
+        <mxCell id="mod-ai" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;fontColor=#ffffff;fontSize=13;fontStyle=1;shadow=1;arcSize=12;strokeColor=none;" value="voxai-agent" vertex="1">
           <mxGeometry height="40" width="400" x="40" y="520" as="geometry" />
         </mxCell>
         <mxCell id="mod-ai-sub" parent="1" style="text;fontSize=10;fontColor=#777;align=left;whiteSpace=wrap;" value="LLM (Spring AI)  ·  STT  ·  TTS  ·  记忆管理  ·  视觉模型  ·  声纹识别  ·  意图检测  ·  工具调用  ·  RAG 知识库  ·  MCP 协议" vertex="1">

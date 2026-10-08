@@ -38,7 +38,7 @@ class ModuleBoundaryArchTest {
     };
 
     /**
-     * 第三方服务 SDK，不分 AI 与否：AI 能力的归 voxai-ai，对象存储/短信/邮件归 service 业务包，server 一个都不许直接用。
+     * 第三方服务 SDK，不分 AI 与否：AI 能力的归 voxai-agent，对象存储/短信/邮件归 service 业务包，server 一个都不许直接用。
      * gson、caffeine、hutool、jjwt 这类通用库不算，列进来会误伤。{@link ForbiddenDependencyArchTest} 共用这份名单。
      */
     static final String[] THIRD_PARTY_SDK_PACKAGES = {
@@ -77,7 +77,7 @@ class ModuleBoundaryArchTest {
      * 包名枚举永远补不全。用它的规则须先过 {@link #modulesBelowServiceAreActuallyScanned}。
      */
     private static final ImportOption ONLY_MODULES_BELOW_SERVICE = location ->
-        location.contains("/voxai-ai/target/")
+        location.contains("/voxai-agent/target/")
             || location.contains("/voxai-dialogue/target/")
             || location.contains("/voxai-server/target/");
 
@@ -274,7 +274,7 @@ class ModuleBoundaryArchTest {
             .and().resideOutsideOfPackage("com.voxai.ai..")
             .should(beRegisteredLegacyForbiddenSuffixBean())
             .because("§7 禁止新增 Helper/Util/Manager/Store 结尾的业务类；"
-                + "voxai-ai 内的技术类（如 *Store）按既有约定不受此规则限制");
+                + "voxai-agent 内的技术类（如 *Store）按既有约定不受此规则限制");
 
         rule.check(voxaiClasses);
     }

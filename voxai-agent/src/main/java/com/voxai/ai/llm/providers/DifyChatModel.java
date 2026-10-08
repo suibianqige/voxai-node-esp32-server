@@ -33,7 +33,7 @@ public class DifyChatModel implements ChatModel {
     /**
      * Persona 在 ToolContext 中放入的 sessionId 键，与
      * {@code com.voxai.dialogue.runtime.Persona.TOOL_CONTEXT_SESSION_ID_KEY} 保持一致。
-     * 此处用字面量是因为 voxai-ai 模块不依赖 voxai-dialogue。
+     * 此处用字面量是因为 voxai-agent 模块不依赖 voxai-dialogue。
      */
     private static final String TOOL_CONTEXT_SESSION_ID_KEY = "sessionId";
 

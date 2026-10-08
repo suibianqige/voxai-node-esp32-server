@@ -31,7 +31,7 @@ COPY repo/ ./repo/
 COPY pom.xml ./
 COPY voxai-common/pom.xml  ./voxai-common/
 COPY voxai-service/pom.xml ./voxai-service/
-COPY voxai-ai/pom.xml      ./voxai-ai/
+COPY voxai-agent/pom.xml      ./voxai-agent/
 COPY voxai-dialogue/pom.xml ./voxai-dialogue/
 COPY voxai-server/pom.xml  ./voxai-server/
 
@@ -41,7 +41,7 @@ RUN mvn -Dmaven.repo.local=/root/.m2/repository dependency:go-offline -DexcludeG
 # 复制所有模块源代码
 COPY voxai-common/src  ./voxai-common/src
 COPY voxai-service/src ./voxai-service/src
-COPY voxai-ai/src      ./voxai-ai/src
+COPY voxai-agent/src      ./voxai-agent/src
 COPY voxai-dialogue/src ./voxai-dialogue/src
 COPY voxai-server/src  ./voxai-server/src
 

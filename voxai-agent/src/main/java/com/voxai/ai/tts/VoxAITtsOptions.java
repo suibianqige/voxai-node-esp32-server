@@ -2,6 +2,8 @@ package com.voxai.ai.tts;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Builder.Default;
+
 import org.springframework.ai.audio.tts.TextToSpeechOptions;
 
 /**
@@ -22,13 +24,13 @@ public class VoxAITtsOptions implements TextToSpeechOptions {
     /**
      * 语速 (0.5-2.0)，1.0 为默认速度
      */
-    @Builder.Default
+    @Default 
     private final Double speed = 1.0;
 
     /**
      * 音调 (0.5-2.0)，1.0 为默认音调
      */
-    @Builder.Default
+    @Default
     private final Double pitch = 1.0;
 
     // ---- Spring AI TextToSpeechOptions 接口实现 ----

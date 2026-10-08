@@ -6,8 +6,8 @@
         <artifactId>voxai-parent</artifactId>
         <version>6.1.0</version>
     </parent>
-    <artifactId>voxai-ai</artifactId>
-    <name>voxai-ai</name>
+    <artifactId>voxai-agent</artifactId>
+    <name>voxai-agent</name>
     <description>AI 能力平台：LLM/TTS/STT provider + 记忆管理</description>
 
     <dependencies>

@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class SmtpEmailSender {
 
-    // 空默认值：voxai-ai/voxai-dialogue 进程整体组件扫描会扫到这个类，
+    // 空默认值：voxai-agent/voxai-dialogue 进程整体组件扫描会扫到这个类，
     // 它们的配置里没有这两个键，不带默认值会导致这些进程启动失败
     @Value("${email.smtp.username:}")
     private String emailUsername;

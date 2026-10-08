@@ -45,14 +45,14 @@ class ServiceLayerArchTest {
      * <p>
      * 原来枚举 {@code ..service.. / ..dal.. / ..security..} 三段，voxai-service 的 141 个包里
      * 有 35 个（domain、infrastructure、model、task 等）一段都不含，写在那里的 Req/Resp 依赖
-     * 规则根本看不见；voxai-ai 更是整个模块基本不带这三段。
+     * 规则根本看不见；voxai-agent 更是整个模块基本不带这三段。
      * <p>
      * 不含 voxai-common：Req/Resp 本身就住在那儿，它们互相引用不是违规。
      * 路径匹配失效会一个类都扫不到而假绿，用它的规则须先过 {@link #belowServerModulesAreActuallyScanned}。
      */
     private static final ImportOption BELOW_SERVER_MODULES = location ->
         location.contains("/voxai-service/target/")
-            || location.contains("/voxai-ai/target/")
+            || location.contains("/voxai-agent/target/")
             || location.contains("/voxai-dialogue/target/");
 
     /**
@@ -62,7 +62,7 @@ class ServiceLayerArchTest {
         location -> location.contains("/voxai-service/target/");
 
     /**
-     * 存量：voxai-ai 的这四个类直接返回 Resp。原枚举式判定面覆盖不到它们所在的包，
+     * 存量：voxai-agent 的这四个类直接返回 Resp。原枚举式判定面覆盖不到它们所在的包，
      * 因此从未被发现。真正的修法是让它们返回 BO、由 server 侧组装 Resp，
      * 涉及 MCP 工具清单与 sherpa 音色探测两条对外链路的返回类型契约，单独排期。
      */

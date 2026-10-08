@@ -122,7 +122,7 @@
 
 ### 💥 重大变更
 - **refactor!: 项目拆分为多模块架构** 
-  - 从单体项目重构为 Maven 多模块：`voxai-common`、`voxai-service`、`voxai-ai`、`voxai-dialogue`、`voxai-server`
+  - 从单体项目重构为 Maven 多模块：`voxai-common`、`voxai-service`、`voxai-agent`、`voxai-dialogue`、`voxai-server`
   - 模块间通过窄接口解耦（AI 模块仍依赖 voxai-service，包括两个 Mapper 直连）
   - Web 组件从 common 迁移至 server 模块，职责更清晰
 

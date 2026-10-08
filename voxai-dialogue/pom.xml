@@ -13,9 +13,9 @@
     <dependencies>
         <dependency>
             <groupId>com.voxai</groupId>
-            <artifactId>voxai-ai</artifactId>
+            <artifactId>voxai-agent</artifactId>
         </dependency>
-        <!-- voxai-common 和 voxai-service 通过 voxai-ai 传递 -->
+        <!-- voxai-common 和 voxai-service 通过 voxai-agent 传递 -->
         <!-- Netty (WebSocket 服务器) -->
         <dependency>
             <groupId>io.netty</groupId>

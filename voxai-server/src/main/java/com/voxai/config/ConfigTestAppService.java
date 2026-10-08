@@ -14,7 +14,7 @@ import java.util.Objects;
 
 /**
  * 配置试拨的编排：把表单值与库里保存的配置合并成一份真正要外呼的配置，交给 ConfigProbe 去 Provider 试拨。
- * <p>真正拨号、翻译报错的逻辑在 voxai-ai 的 {@link ConfigProbe}，这里只管定出「用哪份配置」。
+ * <p>真正拨号、翻译报错的逻辑在 voxai-agent 的 {@link ConfigProbe}，这里只管定出「用哪份配置」。
  */
 @Service
 public class ConfigTestAppService {

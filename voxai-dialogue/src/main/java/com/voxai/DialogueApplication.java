@@ -38,7 +38,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         "com.voxai.summary",
         "com.voxai.task",
         "com.voxai.verifycode",
-        // voxai-ai
+        // voxai-agent
         "com.voxai.ai",
         // voxai-dialogue
         "com.voxai.dialogue",
